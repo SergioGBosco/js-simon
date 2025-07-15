@@ -49,7 +49,12 @@ let generatenumber = []
 
 for (let i = 0; i < 5; i++) {
   let randomnumber = Math.floor(Math.random() * 50 + 1)
-  generatenumber.push(randomnumber);
+  //aggiungo la condizione che permette di non generare numeri uguali
+  if (!generatenumber.includes(randomnumber))
+    generatenumber.push(randomnumber);
+  else {
+    i--
+  }
 }
 console.log(generatenumber)
 
