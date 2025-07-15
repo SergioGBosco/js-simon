@@ -4,7 +4,8 @@ const answersform = document.getElementById(`answers-form`)
 const numberlist = document.getElementById(`numbers-list`)
 const instructions = document.getElementById(`instructions`)
 const message = document.getElementById(`message`)
-const number = document.querySelectorAll(`number`)
+const number = document.querySelectorAll(`input`)
+const button = document.querySelector(`button`)
 
 //comincio con stabilire il countdown
 //aggiungo una variabile timer che cominci da 10 
@@ -34,6 +35,11 @@ const timedown = setInterval(() => {
 
     //generati i numeri e resi visibili, al termine del countdown devo anche questi farli sparire
     numberlist.classList.add(`d-none`)
+
+    //modifico la frase 
+
+    instructions.innerText = `Digita i numeri che ricordi`
+
   }
 }, 1000);//definisco ogni quando tempo vengono fatte le iterazioni 
 
@@ -41,7 +47,7 @@ const timedown = setInterval(() => {
 //aggiungo i 5 numeri che devono essere visualizzati e ricordati dall'utente prima dello scadere del tempo
 let generatenumber = []
 
-for (i = 0; i < 5; i++) {
+for (let i = 0; i < 5; i++) {
   let randomnumber = Math.floor(Math.random() * 50 + 1)
   generatenumber.push(randomnumber);
 }
@@ -49,9 +55,41 @@ console.log(generatenumber)
 
 //adesso mostro i numeri 
 
-for (i = 0; i < generatenumber.length; i++) {
+for (let i = 0; i < generatenumber.length; i++) {
   numberlist.innerHTML += `<li>${generatenumber[i]}</li>`
 }
+
+
+//definisco l'array vuoto dove andro ad inserire i numeri gererati dall'utente
+button.addEventListener(`click`, (e) => {
+  e.preventDefault();
+  usernamber = [];
+
+  for (let i = 0; i < number.length; i++) {
+    usernamber.push(parseInt(number[i].value));
+  }
+
+  console.log(usernamber)
+
+  //condizione di verifica numeri 
+
+  let checknumber = [];
+
+  for (let i = 0; i < generatenumber.length; i++) {
+    if (generatenumber[i] === usernamber[i]) {
+      checknumber.push(generatenumber[i])
+    }
+
+  }
+
+
+  //genero un messaggio che mi permette di vedere il risultato
+  message.innerText = `hai indovinato ${checknumber.length} numeri ovvero ${checknumber}`
+
+
+});
+
+
 
 
 
