@@ -44,19 +44,26 @@ const timedown = setInterval(() => {
 }, 1000);//definisco ogni quando tempo vengono fatte le iterazioni 
 
 
-//aggiungo i 5 numeri che devono essere visualizzati e ricordati dall'utente prima dello scadere del tempo
-let generatenumber = []
 
-for (let i = 0; i < 5; i++) {
-  let randomnumber = Math.floor(Math.random() * 50 + 1)
-  //aggiungo la condizione che permette di non generare numeri uguali
-  if (!generatenumber.includes(randomnumber))
-    generatenumber.push(randomnumber);
-  else {
-    i--
+//modifico la generazione dei numeri in una funzione 
+function randomGenerateNumber(max, min) {
+  //aggiungo i 5 numeri che devono essere visualizzati e ricordati dall'utente prima dello scadere del tempo
+  let generatenumbers = []
+
+  for (let i = 0; i < 5; i++) {
+    let randomnumber = Math.floor(Math.random() * max - min + 1) + min;
+    //aggiungo la condizione che permette di non generare numeri uguali
+    if (!generatenumbers.includes(randomnumber))
+      generatenumbers.push(randomnumber);
+    else {
+      i--
+    }
   }
+  return generatenumbers
 }
-console.log(generatenumber)
+
+
+let generatenumber = randomGenerateNumber(50, 1)
 
 //adesso mostro i numeri 
 
