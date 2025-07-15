@@ -1,7 +1,7 @@
 //Recupero gli elementi dal file html 
 const countdown = document.getElementById(`countdown`)
 const answersform = document.getElementById(`answers-form`)
-const numberlist = document.getElementById(`anumber-list`)
+const numberlist = document.getElementById(`numbers-list`)
 const instructions = document.getElementById(`instructions`)
 const message = document.getElementById(`message`)
 const number = document.querySelectorAll(`number`)
@@ -24,7 +24,38 @@ countdown.innerText = timer;
 const timedown = setInterval(() => {
   timer--
   countdown.innerText = timer;
+
+  if (timer === 0) {
+    clearInterval(timedown)
+    //se il tempo è scaduto tolgo subito il contatore e aggiungo il d-none direttamente al div countdown
+    countdown.classList.add(`d-none`); //
+    //contemporaneamente permetto l'inserimento dei numeri da inserire da parte dell'utente con lo stesso metodo 
+    answersform.classList.remove(`d-none`)
+
+    //generati i numeri e resi visibili, al termine del countdown devo anche questi farli sparire
+    numberlist.classList.add(`d-none`)
+  }
 }, 1000);//definisco ogni quando tempo vengono fatte le iterazioni 
+
+
+//aggiungo i 5 numeri che devono essere visualizzati e ricordati dall'utente prima dello scadere del tempo
+let generatenumber = []
+
+for (i = 0; i < 5; i++) {
+  let randomnumber = Math.floor(Math.random() * 50 + 1)
+  generatenumber.push(randomnumber);
+}
+console.log(generatenumber)
+
+//adesso mostro i numeri 
+
+for (i = 0; i < generatenumber.length; i++) {
+  numberlist.innerHTML += `<li>${generatenumber[i]}</li>`
+}
+
+
+
+
 
 
 
